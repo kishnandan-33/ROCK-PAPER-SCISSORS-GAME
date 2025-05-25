@@ -78,5 +78,24 @@ private static final String DB_PASSWORD = "your-password";
 ![Leaderboard](imgs/Screenshot%202025-05-25%20220617.png)
 
 
+**How to Play**
+- Single Player Mode:
+
+Select "Play with Bot"
+
+Choose your move (Rock, Paper, or Scissors)
+
+View your stats and win percentage
+
+- Multiplayer Mode:
+
+Host: Click "Start as Host"
+
+Client: Enter host IP and click "Connect"
+
+Take turns making moves
+
+Results are saved to match history
+
 
 
