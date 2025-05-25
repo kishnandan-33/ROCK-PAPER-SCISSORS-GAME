@@ -67,3 +67,16 @@ private static final String DB_PASSWORD = "your-password";
   mvn javafx:run
 ```
 
+##Screenshots
+
+![username](imgs/Screenshot%202025-05-25%20220530.png)
+
+![main menu](imgs/Screenshot%202025-05-25%20220542.png)
+
+![play with bot](imgs/Screenshot%202025-05-25%20220558.png)
+
+![Leaderboard](imgs/Screenshot%202025-05-25%20220617.png)
+
+
+
+
