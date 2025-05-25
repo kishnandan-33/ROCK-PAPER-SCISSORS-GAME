@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.MatchHistoryController"
+      spacing="10" alignment="CENTER">
+
+    <TableView fx:id="historyTable" prefWidth="700" prefHeight="500">
+        <columns>
+            <TableColumn text="Player 1" fx:id="player1Column" prefWidth="120"/>
+            <TableColumn text="Player 2" fx:id="player2Column" prefWidth="120"/>
+            <TableColumn text="Move 1" fx:id="move1Column" prefWidth="80"/>
+            <TableColumn text="Move 2" fx:id="move2Column" prefWidth="80"/>
+            <TableColumn text="Winner" fx:id="winnerColumn" prefWidth="120"/>
+            <TableColumn text="Date/Time" fx:id="matchDateColumn" prefWidth="180"/>
+        </columns>
+    </TableView>
+
+    <Button text="Refresh" onAction="#loadMatchHistory" prefWidth="100"/>
+    <Button text="Close" onAction="#handleClose" prefWidth="100"/>
+</VBox>

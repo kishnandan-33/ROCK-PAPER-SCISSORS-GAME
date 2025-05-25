@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="controllers.LeaderboardController" spacing="10" alignment="CENTER">
+    <TableView fx:id="leaderboardTable" prefWidth="500" prefHeight="400">
+        <columns>
+            <TableColumn text="Rank" fx:id="rankColumn" prefWidth="50" />
+            <TableColumn text="Username" fx:id="usernameColumn" prefWidth="150" />
+            <TableColumn text="Total Games" fx:id="totalGamesColumn" prefWidth="100" />
+            <TableColumn text="Wins" fx:id="winsColumn" prefWidth="80" />
+            <TableColumn text="Win %" fx:id="winPercentageColumn" prefWidth="120" />
+        </columns>
+    </TableView>
+    
+    <Button text="Refresh" onAction="#handleRefresh" prefWidth="100" />
+    <Button text="Close" onAction="#handleClose" prefWidth="100" />
+</VBox>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.MultiplayerMenuController"
+      spacing="20" alignment="CENTER" style="-fx-background-color: #f0f0f0;">
+
+    <Label text="Multiplayer Game" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+    <VBox spacing="10" alignment="CENTER">
+        <Label text="Host Game" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+        <Button text="Start as Host" onAction="#handleHostGame"
+                style="-fx-font-weight: bold;" prefWidth="200" />
+    </VBox>
+
+    <VBox spacing="10" alignment="CENTER">
+        <Label text="Join Game" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+        <TextField fx:id="hostIpField" promptText="Enter host IP" prefWidth="200" />
+        <Button text="Connect to Host" onAction="#handleJoinGame"
+                style="-fx-font-weight: bold;" prefWidth="200" />
+    </VBox>
+
+    <Button text="Back to Menu" onAction="#handleBackToMenu"
+            style="-fx-font-weight: bold;" prefWidth="200" />
+</VBox>
