@@ -67,7 +67,7 @@ private static final String DB_PASSWORD = "your-password";
   mvn javafx:run
 ```
 
-##Screenshots
+## Screenshots
 
 ![username](imgs/Screenshot%202025-05-25%20220530.png)
 
