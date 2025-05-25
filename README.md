@@ -39,5 +39,49 @@ A feature-rich Rock Paper Scissors game with both single-player (vs AI) and mult
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/rock-paper-scissors-javafx.git
-   cd rock-paper-scissors-javafx
+   git clone https://github.com/kishnandan-33/ROCK-PAPER-SCISSORS-GAME.git
+   cd ROCK-PAPER-SCISSORS-GAME/RockPaperScissorsFX
+
+2.**Database Configuration**:
+- Create a database (or use existing one)
+Update connection details in :
+- DBUtil.java
+- MultiplayerHostController.java
+- LeaderboardController.java
+- BotGameController.java
+files
+
+e.g.
+```java
+private static final String DB_URL = "jdbc:mysql://your-host:3306/your-database";
+private static final String DB_USER = "your-username";
+private static final String DB_PASSWORD = "your-password";
+```
+
+3.**Build and Run**:
+
+```bash
+  mvn clean install
+  mvn javafx:run
+```
+
+### Additional Recommendations:
+
+1. Create a `screenshots` folder and add actual game screenshots
+2. Add a `LICENSE` file (MIT is good for open source projects)
+3. Include a `.gitignore` file for Java/Maven projects
+4. For the GitHub repository, set these labels:
+   - `Java`
+   - `JavaFX`
+   - `Game`
+   - `MySQL`
+
+The README provides:
+- Clear installation instructions
+- Feature overview
+- Technology stack
+- Visual representation
+- Contribution guidelines
+- Professional badges
+
+Would you like me to suggest any additional sections or make any adjustments to the README?
