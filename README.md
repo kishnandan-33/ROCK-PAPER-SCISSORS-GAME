@@ -67,23 +67,3 @@ private static final String DB_PASSWORD = "your-password";
   mvn javafx:run
 ```
 
-### Additional Recommendations:
-
-1. Create a `screenshots` folder and add actual game screenshots
-2. Add a `LICENSE` file (MIT is good for open source projects)
-3. Include a `.gitignore` file for Java/Maven projects
-4. For the GitHub repository, set these labels:
-   - `Java`
-   - `JavaFX`
-   - `Game`
-   - `MySQL`
-
-The README provides:
-- Clear installation instructions
-- Feature overview
-- Technology stack
-- Visual representation
-- Contribution guidelines
-- Professional badges
-
-Would you like me to suggest any additional sections or make any adjustments to the README?
