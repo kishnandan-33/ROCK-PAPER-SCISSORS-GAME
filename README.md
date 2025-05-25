@@ -43,8 +43,10 @@ A feature-rich Rock Paper Scissors game with both single-player (vs AI) and mult
    cd ROCK-PAPER-SCISSORS-GAME/RockPaperScissorsFX
 
 2.**Database Configuration**:
-- Create a database (or use existing one)
+Create a database (or use existing one)
+
 Update connection details in :
+
 - DBUtil.java
 - MultiplayerHostController.java
 - LeaderboardController.java
