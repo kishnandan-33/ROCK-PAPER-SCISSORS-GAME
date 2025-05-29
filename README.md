@@ -47,11 +47,8 @@ Create a database (or use existing one)
 
 Update connection details in :
 
-- DBUtil.java
-- MultiplayerHostController.java
-- LeaderboardController.java
-- BotGameController.java
-files
+- DBUtil.java file
+  
 
 e.g.
 ```java
