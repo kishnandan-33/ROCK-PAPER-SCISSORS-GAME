@@ -64,6 +64,32 @@ private static final String DB_PASSWORD = "your-password";
   mvn javafx:run
 ```
 
+## Project Structure
+
+ROCK-PAPER-SCISSORS-GAME/
+├── README.md
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── rockpaperscissors/
+│   │   │           ├── Main.java
+│   │   │           ├── Game.java
+│   │   │           ├── Player.java
+│   │   │           ├── AIPlayer.java
+│   │   │           ├── Multiplayer.java
+│   │   │           ├── Database.java
+│   │   │           └── Leaderboard.java
+│   │   └── resources/
+│   │       └── images/
+│   │           └── game_icons.png
+├── imgs/
+│   └── game_icons.png
+├── pom.xml
+└── .gitignore
+
+
+
 ## Screenshots
 
 ![username](imgs/Screenshot%202025-05-25%20220530.png)
