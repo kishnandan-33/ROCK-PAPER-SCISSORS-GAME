@@ -63,9 +63,10 @@ private static final String DB_PASSWORD = "your-password";
   mvn clean install
   mvn javafx:run
 ```
+<br>
 
 ## Project Structure
-
+```
 ROCK-PAPER-SCISSORS-GAME/
 ├── README.md
 ├── src/
@@ -87,8 +88,8 @@ ROCK-PAPER-SCISSORS-GAME/
 │   └── game_icons.png
 ├── pom.xml
 └── .gitignore
-
-
+```
+<br>
 
 ## Screenshots
 
