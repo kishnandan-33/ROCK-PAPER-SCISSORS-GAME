@@ -87,7 +87,6 @@ ROCK-PAPER-SCISSORS-GAME/
 ├── imgs/
 │   └── game_icons.png
 ├── pom.xml
-└── .gitignore
 ```
 <br>
 
