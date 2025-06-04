@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
-import models.MatchHistoryEntry;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -79,7 +78,7 @@ public class MultiplayerHostController {
         try {
             opponentMove = (String) input.readObject();
             Platform.runLater(() -> {
-                logMessage(opponentName + " chose: " + opponentMove);
+                // logMessage(opponentName + " chose: " + opponentMove);
                 determineWinner();
                 prepareNextRound();
             });

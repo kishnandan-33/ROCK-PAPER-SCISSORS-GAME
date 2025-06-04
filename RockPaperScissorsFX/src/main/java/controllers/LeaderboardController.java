@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
+import models.DBUtil;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -37,7 +37,7 @@ public class LeaderboardController {
     public void loadLeaderboard() {
         leaderboardData.clear();
         
-        try (Connection conn = getConnection()) {
+        try (Connection conn = DBUtil.getConnection()) {
             String sql = "SELECT username, total_games, wins, win_percentage " +
                          "FROM leaderboard ORDER BY win_percentage DESC, wins DESC";
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -69,14 +69,7 @@ public class LeaderboardController {
         Stage stage = (Stage) leaderboardTable.getScene().getWindow();
         stage.close();
     }
-    
-    private Connection getConnection() throws Exception {
-        // Replace with your actual database connection details
-        String url = "jdbc:mysql://sql12.freesqldatabase.com:3306/sql12781074";
-        String user = "sql12781074";
-        String password = "ym3wh2nlkJ";
-        return DriverManager.getConnection(url, user, password);
-    }
+
     
     public static class LeaderboardEntry {
         private final int rank;
