@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +19,8 @@ public class MultiplayerClientController {
     @FXML private Label statusLabel;
     @FXML private VBox gameControls;
     @FXML private TextArea logArea;
+    private AudioClip clickSound2 = new AudioClip(getClass().getResource("/sounds/mclick.wav").toString());
+    private AudioClip clickSound = new AudioClip(getClass().getResource("/sounds/click.wav").toString());
 
     private String username;
     private String hostIp;
@@ -81,6 +84,7 @@ public class MultiplayerClientController {
     }
 
     private void makeMove(String move) {
+        clickSound.play();
         try {
             output.writeObject(move);
             output.flush();
@@ -104,6 +108,7 @@ public class MultiplayerClientController {
 
     @FXML
     private void handleDisconnect() {
+        clickSound2.play();
         gameActive = false;
         closeConnections();
         Stage stage = (Stage) statusLabel.getScene().getWindow();
@@ -111,6 +116,7 @@ public class MultiplayerClientController {
     }
 
     private void closeConnections() {
+        clickSound2.play();
         try {
             if (output != null) output.close();
             if (input != null) input.close();

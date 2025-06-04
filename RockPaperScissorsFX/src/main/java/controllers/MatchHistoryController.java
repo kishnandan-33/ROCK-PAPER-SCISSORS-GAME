@@ -6,10 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import models.MatchHistoryEntry;
 import models.DBUtil;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +24,7 @@ public class MatchHistoryController {
     @FXML private TableColumn<MatchHistoryEntry, String> move2Column;
     @FXML private TableColumn<MatchHistoryEntry, String> winnerColumn;
     @FXML private TableColumn<MatchHistoryEntry, String> matchDateColumn;
+    private AudioClip clickSound2 = new AudioClip(getClass().getResource("/sounds/mclick.wav").toString());
 
     private ObservableList<MatchHistoryEntry> matchHistoryData = FXCollections.observableArrayList();
     private String username;
@@ -89,6 +90,7 @@ public class MatchHistoryController {
 
     @FXML
     private void handleClose() {
+        clickSound2.play();
         Stage stage = (Stage) historyTable.getScene().getWindow();
         stage.close();
     }

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--<?xml version="1.0" encoding="UTF-8"?>-->
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
@@ -7,20 +6,21 @@
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controllers.MainMenuController"
-      spacing="20" alignment="CENTER" style="-fx-background-color: #f0f0f0;">
-
-    <Text text="Rock, Paper, Scissors"
-          style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
+      spacing="20"
+      alignment="CENTER" stylesheets="@../css/styles.css" prefWidth="100" minWidth="100" maxWidth="100">
 
     <Button text="Play with Bot" onAction="#handlePlayWithBot"
-            style="-fx-font-weight: bold; -fx-font-size: 14px;" prefWidth="200" />
+            styleClass="menu-button" prefWidth="200" />
 
     <Button text="Play with Friend" onAction="#handlePlayWithFriend"
-            style="-fx-font-weight: bold; -fx-font-size: 14px;" prefWidth="200" />
+            styleClass="menu-button"
+            prefWidth="200" />
 
     <Button text="View Leaderboard" onAction="#handleViewLeaderboard"
-            style="-fx-font-weight: bold; -fx-font-size: 14px;" prefWidth="200" />
+            styleClass="menu-button"
+            prefWidth="200" />
 
     <Button text="View Match History" onAction="#handleViewMatchHistory"
-            style="-fx-font-weight: bold; -fx-font-size: 14px;" prefWidth="200" />
+            styleClass="menu-button"
+            prefWidth="200" />
 </VBox>

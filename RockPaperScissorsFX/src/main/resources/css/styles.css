@@ -1,3 +1,49 @@
+/* Background Image */
+.root {
+    -fx-background-image: url("../images/bg2.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+/* Base Button Style */
+.menu-button {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+/* Individual Button Colors */
+.menu-button {
+    -fx-background-color: #3498db; /* Default blue */
+}
+
+.menu-button:hover {
+    -fx-background-color: #2980b9; /* Darker blue on hover */
+    -fx-cursor: hand;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-transition: all 0.3s;
+}
+
+/* Specific button colors (optional) */
+#playWithFriendButton { /* If you add fx:id to buttons */
+    -fx-background-color: #2ecc71; /* Green */
+}
+#playWithFriendButton:hover {
+    -fx-background-color: #27ae60; /* Darker green */
+}
+
+#viewLeaderboardButton {
+    -fx-background-color: #e74c3c; /* Red */
+}
+#viewLeaderboardButton:hover {
+    -fx-background-color: #c0392b; /* Darker red */
+}
+
 .root {
     -fx-font-family: "Arial";
     -fx-base: #3498db;

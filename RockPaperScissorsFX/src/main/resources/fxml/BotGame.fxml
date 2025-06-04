@@ -8,17 +8,17 @@
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controllers.BotGameController"
-      spacing="20" alignment="CENTER" style="-fx-background-color: #f0f0f0;">
+      spacing="20" alignment="CENTER" style="-fx-background-color: #82A6EC;">
 
     <Label text="Play with Bot" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
 
     <HBox spacing="20" alignment="CENTER">
-        <Button text="Rock" onAction="#handleRock" prefWidth="100"
-                style="-fx-base: #ff6b6b; -fx-font-weight: bold;" />
-        <Button text="Paper" onAction="#handlePaper" prefWidth="100"
-                style="-fx-base: #4ecdc4; -fx-font-weight: bold;" />
-        <Button text="Scissors" onAction="#handleScissors" prefWidth="100"
-                style="-fx-base: #ffe66d; -fx-font-weight: bold;" />
+        <Button text="🪨 Rock" onAction="#handleRock" prefWidth="130"
+                style="-fx-base: #ff6b6b; -fx-font-weight: bold; -fx-font-family: 'Segoe UI Emoji';" />
+        <Button text="📰 Paper" onAction="#handlePaper" prefWidth="130"
+                style="-fx-base: #4ecdc4; -fx-font-weight: bold; -fx-font-family: 'Segoe UI Emoji';" />
+        <Button text="✂️ Scissors" onAction="#handleScissors" prefWidth="130"
+                style="-fx-base: #ffe66d; -fx-font-weight: bold; -fx-font-family: 'Segoe UI Emoji';" />
     </HBox>
 
     <VBox spacing="10" alignment="CENTER">

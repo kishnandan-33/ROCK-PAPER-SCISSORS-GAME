@@ -1,5 +1,7 @@
 package controllers;
+import javafx.scene.media.AudioClip;
 import models.DBUtil;
+import java.net.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -21,10 +23,15 @@ public class MultiplayerHostController {
     @FXML private VBox gameControls;
     @FXML private TextArea logArea;
 
+    private AudioClip clickSound = new AudioClip(getClass().getResource("/sounds/click.wav").toString());
+    private AudioClip clickSound2 = new AudioClip(getClass().getResource("/sounds/mclick.wav").toString());
+
+
     private String username;
     private String playerMove;
     private String opponentMove;
     private String opponentName;
+    public String ip;
 
     private ServerSocket serverSocket;
     private Socket clientSocket;
@@ -40,9 +47,11 @@ public class MultiplayerHostController {
     private void startServer() {
         new Thread(() -> {
             try {
+                ip = Inet4Address.getLocalHost().getHostAddress();
+
                 serverSocket = new ServerSocket(5555);
                 Platform.runLater(() -> {
-                    statusLabel.setText("Waiting for player on port 5555...");
+                    statusLabel.setText(String.format("Waiting for player on IP %s", ip));
                     logMessage("Server started. Waiting for connection...");
                 });
 
@@ -147,6 +156,7 @@ public class MultiplayerHostController {
     }
 
     private void makeMove(String move) {
+        clickSound.play();
         playerMove = move;
         Platform.runLater(() -> {
             gameControls.setVisible(false);
@@ -172,6 +182,7 @@ public class MultiplayerHostController {
 
     @FXML
     private void handleCloseGame() {
+        clickSound2.play();
         gameActive = false;
         closeConnections();
         Stage stage = (Stage) statusLabel.getScene().getWindow();
@@ -179,6 +190,7 @@ public class MultiplayerHostController {
     }
 
     private void closeConnections() {
+        clickSound2.play();
         try {
             if (output != null) output.close();
             if (input != null) input.close();

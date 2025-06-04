@@ -5,10 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import models.DBUtil;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -19,7 +19,9 @@ public class LeaderboardController {
     @FXML private TableColumn<LeaderboardEntry, Integer> totalGamesColumn;
     @FXML private TableColumn<LeaderboardEntry, Integer> winsColumn;
     @FXML private TableColumn<LeaderboardEntry, Double> winPercentageColumn;
-    
+    private AudioClip clickSound2 = new AudioClip(getClass().getResource("/sounds/mclick.wav").toString());
+
+
     private ObservableList<LeaderboardEntry> leaderboardData = FXCollections.observableArrayList();
     
     @FXML
@@ -61,11 +63,13 @@ public class LeaderboardController {
     
     @FXML
     private void handleRefresh() {
+        clickSound2.play();
         loadLeaderboard();
     }
     
     @FXML
     private void handleClose() {
+        clickSound2.play();
         Stage stage = (Stage) leaderboardTable.getScene().getWindow();
         stage.close();
     }

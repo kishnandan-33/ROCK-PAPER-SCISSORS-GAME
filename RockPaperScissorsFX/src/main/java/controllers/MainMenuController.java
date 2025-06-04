@@ -52,12 +52,13 @@ public class MainMenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Leaderboard.fxml"));
         Parent root = loader.load();
         LeaderboardController controller = loader.getController();
-        controller.loadLeaderboard();
+//        controller.loadLeaderboard();
 
         Stage stage = new Stage();
         stage.setTitle("Leaderboard");
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
+        controller.loadLeaderboard();
 
     }
 
