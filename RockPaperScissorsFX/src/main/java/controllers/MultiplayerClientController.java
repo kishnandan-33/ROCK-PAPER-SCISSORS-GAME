@@ -1,12 +1,16 @@
 package controllers;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,6 +23,7 @@ public class MultiplayerClientController {
     @FXML private Label statusLabel;
     @FXML private VBox gameControls;
     @FXML private TextArea logArea;
+    @FXML private ImageView celebrationView;
     private AudioClip clickSound2 = new AudioClip(getClass().getResource("/sounds/mclick.wav").toString());
     private AudioClip clickSound = new AudioClip(getClass().getResource("/sounds/click.wav").toString());
 
@@ -29,6 +34,31 @@ public class MultiplayerClientController {
     private ObjectInputStream input;
     private boolean gameActive = true;
 
+    public void showWinGif(String result) {
+        // Set the GIF image
+        if(result == "win"){
+            Image winGif = new Image(getClass().getResource("/images/win.gif").toExternalForm());
+            celebrationView.setImage(winGif);
+            celebrationView.setVisible(true);
+            // Hide it after 2.5 seconds
+            AudioClip Sound = new AudioClip(getClass().getResource("/sounds/le.wav").toString());
+            Sound.play();
+            PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
+            pause.setOnFinished(e -> celebrationView.setVisible(false));
+            pause.play();
+        }else{
+            Image winGif = new Image(getClass().getResource("/images/loss.gif").toExternalForm());
+            celebrationView.setImage(winGif);
+            celebrationView.setVisible(true);
+            // Hide it after 3 seconds
+            AudioClip Sound = new AudioClip(getClass().getResource("/sounds/cry.wav").toString());
+            Sound.play();
+            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+            pause.setOnFinished(e -> celebrationView.setVisible(false));
+            pause.play();
+        }
+
+    }
     public void setUsername(String username) {
         this.username = username;
     }
@@ -70,6 +100,11 @@ public class MultiplayerClientController {
                             // Game result
                             Platform.runLater(() -> {
                                 logMessage(message);
+                                if (message.contains(username)){
+                                    showWinGif("win");
+                                }else {
+                                    showWinGif("loss");
+                                }
                                 gameControls.setVisible(true);
                             });
                         }

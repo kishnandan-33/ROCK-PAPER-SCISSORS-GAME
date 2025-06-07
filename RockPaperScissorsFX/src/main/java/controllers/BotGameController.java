@@ -6,6 +6,10 @@ import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import java.sql.Connection;
 import javafx.concurrent.Task;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import models.DBUtil;
 import java.sql.PreparedStatement;
@@ -15,7 +19,9 @@ public class BotGameController {
     @FXML private Label resultLabel;
     @FXML private Label computerChoiceLabel;
     @FXML private Label statsLabel;
-    
+    @FXML private ImageView celebrationView;
+
+
     private String username;
     private int playerWins = 0;
     private int computerWins = 0;
@@ -23,6 +29,32 @@ public class BotGameController {
 
     private AudioClip clickSound = new AudioClip(getClass().getResource("/sounds/click.wav").toString());
     private AudioClip clickSound2 = new AudioClip(getClass().getResource("/sounds/mclick.wav").toString());
+    public void showWinGif(String result) {
+        // Set the GIF image
+        if(result == "win"){
+            Image winGif = new Image(getClass().getResource("/images/win.gif").toExternalForm());
+            celebrationView.setImage(winGif);
+            celebrationView.setVisible(true);
+            // Hide it after 2.5 seconds
+            AudioClip Sound = new AudioClip(getClass().getResource("/sounds/le.wav").toString());
+            Sound.play();
+            PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
+            pause.setOnFinished(e -> celebrationView.setVisible(false));
+            pause.play();
+        }else{
+            Image winGif = new Image(getClass().getResource("/images/loss.gif").toExternalForm());
+            celebrationView.setImage(winGif);
+            celebrationView.setVisible(true);
+            // Hide it after 3 seconds
+            AudioClip Sound = new AudioClip(getClass().getResource("/sounds/cry.wav").toString());
+            Sound.play();
+            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+            pause.setOnFinished(e -> celebrationView.setVisible(false));
+            pause.play();
+        }
+
+    }
+
 
 
     public void setUsername(String username) {
@@ -107,10 +139,13 @@ public class BotGameController {
             (playerChoice.equals("Paper") && computerChoice.equals("Rock")) ||
             (playerChoice.equals("Scissors") && computerChoice.equals("Paper"))) {
             playerWins++;
+            showWinGif("win");
             return "You win!";
         } else {
+
             computerWins++;
-            return "Computer wins!";
+            showWinGif("loss");
+            return "Computer wins! You Loss!";
         }
     }
     

@@ -1,5 +1,9 @@
 package controllers;
+import javafx.animation.PauseTransition;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
+import javafx.util.Duration;
 import models.DBUtil;
 import java.net.*;
 import javafx.application.Platform;
@@ -22,6 +26,7 @@ public class MultiplayerHostController {
     @FXML private Label statusLabel;
     @FXML private VBox gameControls;
     @FXML private TextArea logArea;
+    @FXML private ImageView celebrationView;
 
     private AudioClip clickSound = new AudioClip(getClass().getResource("/sounds/click.wav").toString());
     private AudioClip clickSound2 = new AudioClip(getClass().getResource("/sounds/mclick.wav").toString());
@@ -38,6 +43,31 @@ public class MultiplayerHostController {
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private boolean gameActive = true;
+    public void showWinGif(String result) {
+        // Set the GIF image
+        if(result == "win"){
+            Image winGif = new Image(getClass().getResource("/images/win.gif").toExternalForm());
+            celebrationView.setImage(winGif);
+            celebrationView.setVisible(true);
+            // Hide it after 2.5 seconds
+            AudioClip Sound = new AudioClip(getClass().getResource("/sounds/le.wav").toString());
+            Sound.play();
+            PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
+            pause.setOnFinished(e -> celebrationView.setVisible(false));
+            pause.play();
+        }else{
+            Image winGif = new Image(getClass().getResource("/images/loss.gif").toExternalForm());
+            celebrationView.setImage(winGif);
+            celebrationView.setVisible(true);
+            // Hide it after 3 seconds
+            AudioClip Sound = new AudioClip(getClass().getResource("/sounds/cry.wav").toString());
+            Sound.play();
+            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+            pause.setOnFinished(e -> celebrationView.setVisible(false));
+            pause.play();
+        }
+
+    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -108,9 +138,11 @@ public class MultiplayerHostController {
                 (playerMove.equals("Scissors") && opponentMove.equals("Paper"))) {
             result = username + " wins! " + playerMove + " beats " + opponentMove;
             winner = username;
+            showWinGif("win");
         } else {
             result = opponentName + " wins! " + opponentMove + " beats " + playerMove;
             winner = opponentName;
+            showWinGif("loss");
         }
 
         logMessage(result);
