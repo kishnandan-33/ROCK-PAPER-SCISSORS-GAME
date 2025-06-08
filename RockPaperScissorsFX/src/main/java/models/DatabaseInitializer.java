@@ -3,6 +3,8 @@ package models;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javafx.application.Platform;
+
 
 public class DatabaseInitializer {
     public static void initializeDatabase() {
@@ -43,6 +45,16 @@ public class DatabaseInitializer {
 
         try (Connection conn = DBUtil.getConnection();
              Statement stmt = conn.createStatement()) {
+            if (conn == null) {
+                // Show error and exit app gracefully
+                Platform.runLater(() -> {
+                    Utils.showError("Database Error", "Could not connect to the database. Please check your internet or configuration.");
+                    System.exit(1);
+                });
+            } else {
+                // Your existing DB initialization logic here
+                System.out.println("Database connected successfully.");
+            }
 
             // Create tables
             stmt.executeUpdate(createLeaderboardTable);

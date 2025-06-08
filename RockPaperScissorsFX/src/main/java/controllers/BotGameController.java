@@ -11,7 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.animation.PauseTransition;
 import models.DBUtil;
-
+import javafx.application.Platform;
+import models.Utils;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -62,25 +63,39 @@ public class BotGameController {
         loadStats();
     }
 
-    
+
     private void loadStats() {
-        try (Connection conn = DBUtil.getConnection()) {
-            String sql = "SELECT total_games, wins FROM leaderboard WHERE username = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                totalGames = rs.getInt("total_games");
-                playerWins = rs.getInt("wins");
-                computerWins = totalGames - playerWins;
-                updateStatsLabel();
+        Task<Void> loadTask = new Task<>() {
+            @Override
+            protected Void call() {
+                try (Connection conn = DBUtil.getConnection()) {
+                    if (conn == null) {
+                        Platform.runLater(() -> Utils.showError("Database Error", "Could not connect to the database."));
+                        return null;
+                    }
+                    String sql = "SELECT total_games, wins FROM leaderboard WHERE username = ?";
+                    PreparedStatement stmt = conn.prepareStatement(sql);
+                    stmt.setString(1, username);
+                    ResultSet rs = stmt.executeQuery();
+
+                    if (rs.next()) {
+                        totalGames = rs.getInt("total_games");
+                        playerWins = rs.getInt("wins");
+                        computerWins = totalGames - playerWins;
+                    }
+
+                    Platform.runLater(() -> updateStatsLabel());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Platform.runLater(() -> Utils.showError("Database Error", "Error loading stats: " + e.getMessage()));
+                }
+                return null;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        };
+        new Thread(loadTask).start();
     }
-    
+
+
     private void updateStatsLabel() {
         double winPercentage = totalGames > 0 ? (double) playerWins / totalGames * 100 : 0;
         statsLabel.setText(String.format("Wins: %d | Losses: %d | Total: %d | Win %%: %.1f", 
