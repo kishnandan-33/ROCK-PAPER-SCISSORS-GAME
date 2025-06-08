@@ -77,26 +77,50 @@ private static final String DB_PASSWORD = "your-password";
 
 ## Project Structure
 ```
-ROCK-PAPER-SCISSORS-GAME/
-├── README.md
+Rock-Paper-Scissors-Game/
+│
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── rockpaperscissors/
-│   │   │           ├── Main.java
-│   │   │           ├── Game.java
-│   │   │           ├── Player.java
-│   │   │           ├── AIPlayer.java
-│   │   │           ├── Multiplayer.java
-│   │   │           ├── Database.java
-│   │   │           └── Leaderboard.java
+│   │   │   ├── controllers/          # JavaFX controller classes handling UI logic
+│   │   │   │   ├── MainMenuController.java
+│   │   │   │   ├── BotGameController.java
+│   │   │   │   ├── MultiplayerMenuController.java
+│   │   │   │   ├── LeaderboardController.java
+│   │   │   │   ├── MatchHistoryController.java
+│   │   │   │   └── ...               # other controller classes
+│   │   │   │
+│   │   │   ├── models/               # Data model and utility classes
+│   │   │   │   ├── DBUtil.java       # Database connection utilities
+│   │   │   │   ├── Utils.java        # Utility helper methods (error dialogs, etc.)
+│   │   │   │   └── DatabaseInitializer.java  # Database setup helper
+│   │   │   │
+│   │   │   ├── RockPaperScissorsApp.java  # Main application entry point
+│   │   │   └── ...                   # any other core classes
+│   │   │
 │   │   └── resources/
-│   │       └── images/
-│   │           └── game_icons.png
-├── imgs/
-│   └── game_icons.png
-├── pom.xml
+│   │       ├── fxml/                 # FXML files defining UI layouts
+│   │       │   ├── MainMenu.fxml
+│   │       │   ├── BotGame.fxml
+│   │       │   ├── MultiplayerMenu.fxml
+│   │       │   ├── Leaderboard.fxml
+│   │       │   ├── MatchHistory.fxml
+│   │       │   └── ...
+│   │       │
+│   │       ├── images/               # Image and GIF assets
+│   │       │   ├── win.gif
+│   │       │   ├── loss.gif
+│   │       │   └── ...
+│   │       │
+│   │       ├── sounds/               # Audio files for sound effects
+│   │           ├── click.wav
+│   │           ├── mclick.wav
+│   │           ├── le.wav
+│   │           └── cry.wav
+│
+├── README.md                       # Project documentation file       
+└── pom.xml       # Build configuration files (if using Maven/Gradle)
+
 ```
 <br>
 
