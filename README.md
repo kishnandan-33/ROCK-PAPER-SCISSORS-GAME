@@ -77,7 +77,7 @@ private static final String DB_PASSWORD = "your-password";
 
 ## Project Structure
 ```
-Rock-Paper-Scissors-Game/
+RockPaperScissorsFX/
 │
 ├── src/
 │   ├── main/
