@@ -1,79 +1,120 @@
-package controllers;  // Must match your package structure
+package controllers;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.control.Alert;
 import javafx.scene.media.AudioClip;
+import javafx.stage.Stage;
 
 public class MainMenuController {
-    private String username; // Store username
+    private String username;
 
-    private AudioClip clickSound = new AudioClip(getClass().getResource("/sounds/click.wav").toString());
+    private AudioClip clickSound;
 
-
-    // Add this method
     public void setUsername(String username) {
-        this.username = username;
+        if (username == null || username.trim().isEmpty()) {
+            this.username = "Guest";
+        } else {
+            this.username = username;
+        }
+    }
+
+    public MainMenuController() {
+        try {
+            clickSound = new AudioClip(getClass().getResource("/sounds/click.wav").toString());
+        } catch (Exception e) {
+            System.err.println("Error loading click sound: " + e.getMessage());
+        }
     }
 
     @FXML
-    private void handlePlayWithBot() throws Exception {
-        clickSound.play();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BotGame.fxml"));
-        Parent root = loader.load();
-        BotGameController controller = loader.getController();
+    private void handlePlayWithBot() {
+        playSound();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BotGame.fxml"));
+            Parent root = loader.load();
+            BotGameController controller = loader.getController();
 
-        Stage stage = new Stage();
-        stage.setTitle("Play with Bot - " + username);
-        stage.setScene(new Scene(root, 600, 400));
-        stage.show();
-        controller.setUsername(username);  // Pass username to next screen
+
+            Stage stage = new Stage();
+            stage.setTitle("Play with Bot - " + username);
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+            controller.setUsername(username);
+        } catch (Exception e) {
+            showError("Failed to load Bot Game", e.getMessage());
+        }
     }
 
     @FXML
-    private void handlePlayWithFriend() throws Exception {
-        clickSound.play();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MultiplayerMenu.fxml"));
-        Parent root = loader.load();
-        MultiplayerMenuController controller = loader.getController();
-//        controller.setUsername(username);
+    private void handlePlayWithFriend() {
+        playSound();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MultiplayerMenu.fxml"));
+            Parent root = loader.load();
+            MultiplayerMenuController controller = loader.getController();
 
-        Stage stage = new Stage();
-        stage.setTitle("Play with Friend - " + username);
-        stage.setScene(new Scene(root, 600, 400));
-        stage.show();
-        controller.setUsername(username);
+            Stage stage = new Stage();
+            stage.setTitle("Play with Friend - " + username);
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+            controller.setUsername(username);
+        } catch (Exception e) {
+            showError("Failed to load Multiplayer Menu", e.getMessage());
+        }
     }
 
     @FXML
-    private void handleViewLeaderboard() throws Exception {
-        clickSound.play();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Leaderboard.fxml"));
-        Parent root = loader.load();
-        LeaderboardController controller = loader.getController();
-//        controller.loadLeaderboard();
+    private void handleViewLeaderboard() {
+        playSound();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Leaderboard.fxml"));
+            Parent root = loader.load();
+            LeaderboardController controller = loader.getController();
+            controller.loadLeaderboard();
 
-        Stage stage = new Stage();
-        stage.setTitle("Leaderboard");
-        stage.setScene(new Scene(root, 600, 400));
-        stage.show();
-        controller.loadLeaderboard();
-
+            Stage stage = new Stage();
+            stage.setTitle("Leaderboard");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        } catch (Exception e) {
+            showError("Failed to load Leaderboard", e.getMessage());
+        }
     }
 
     @FXML
-    private void handleViewMatchHistory() throws Exception {
-        clickSound.play();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MatchHistory.fxml"));
-        Parent root = loader.load();
-        MatchHistoryController controller = loader.getController();
-//        controller.setUsername(username);
+    private void handleViewMatchHistory() {
+        playSound();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MatchHistory.fxml"));
+            Parent root = loader.load();
+            MatchHistoryController controller = loader.getController();
 
-        Stage stage = new Stage();
-        stage.setTitle("Match History - " + username);
-        stage.setScene(new Scene(root, 800, 600));
-        stage.show();
-        controller.setUsername(username);
+            Stage stage = new Stage();
+            stage.setTitle("Match History - " + username);
+            stage.setScene(new Scene(root, 800, 600));
+            stage.show();
+            controller.setUsername(username);
+        } catch (Exception e) {
+            showError("Failed to load Match History", e.getMessage());
+        }
+    }
+
+    // Helper: Show error alert
+    private void showError(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    // Helper: Play click sound safely
+    private void playSound() {
+        if (clickSound != null) {
+            clickSound.play();
+        }
     }
 }
