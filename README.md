@@ -9,8 +9,10 @@ A feature-rich Rock Paper Scissors game with both single-player (vs AI) and mult
 ## Features
 
 🎮 **Game Modes**:
-- Play against AI with adjustable difficulty
+- Rock, Paper, Scissors game with score tracking
 - LAN multiplayer (host/client) functionality
+- User vs Computer gameplay
+  
 
 📊 **Data Tracking**:
 - Player statistics and win/loss records
@@ -20,6 +22,14 @@ A feature-rich Rock Paper Scissors game with both single-player (vs AI) and mult
 🌐 **Database**:
 - MySQL backend for persistent data storage
 - Automatic table initialization
+
+  
+## Extra Features
+- Rock, Paper, Scissors game with score tracking
+- User vs Computer gameplay
+- Real-time score display
+- Background music
+- Animation on Win/loss
 
 ## Technologies Used
 
@@ -35,7 +45,7 @@ A feature-rich Rock Paper Scissors game with both single-player (vs AI) and mult
 - MySQL Server 8.0+
 - Maven 3.6+
 
-### Setup Steps
+### Setup Instructions
 
 1. **Clone the repository**:
    ```bash
