@@ -12,8 +12,14 @@ public class RockPaperScissorsApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Initialize database (ensure tables exist, etc.)
-            DatabaseInitializer.initializeDatabase();
+            try {
+                // Initialize database (ensure tables exist, etc.)
+                DatabaseInitializer.initializeDatabase();
+            } catch (Exception e) {
+                System.err.println("Database init failed: " + e.getMessage());
+                return;
+            }
+
 
             // Ask user for their name
             UsernameInputDialog usernameDialog = new UsernameInputDialog();

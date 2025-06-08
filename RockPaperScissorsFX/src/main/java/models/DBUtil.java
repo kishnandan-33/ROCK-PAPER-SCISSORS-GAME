@@ -9,13 +9,16 @@ public class DBUtil {
     private static final String DB_USER = "avnadmin";
     private static final String DB_PASSWORD = "AVNS_3kAGU-MvfBSQlb1LmjY";
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
         } catch (ClassNotFoundException e) {
-            throw new SQLException("MySQL JDBC Driver not found", e);
+            System.err.println("MySQL JDBC Driver not found: " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Database connection failed: " + e.getMessage());
         }
+        return null;  // Graceful failure
     }
 
     public static void closeConnection(Connection conn) {
@@ -24,7 +27,7 @@ public class DBUtil {
                 conn.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error closing database connection: " + e.getMessage());
         }
     }
 }

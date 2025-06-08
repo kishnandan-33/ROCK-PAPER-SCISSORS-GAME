@@ -10,8 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import models.DBUtil;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -91,6 +91,7 @@ public class BotGameController {
         Task<Void> updateTask = new Task<>() {
             @Override
             protected Void call() {
+
                 try (Connection conn = DBUtil.getConnection()) {
                     String checkSql = "SELECT username FROM leaderboard WHERE username = ?";
                     PreparedStatement checkStmt = conn.prepareStatement(checkSql);
