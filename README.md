@@ -124,17 +124,6 @@ RockPaperScissorsFX/
 ```
 <br>
 
-## Screenshots
-
-![username](imgs/Screenshot%202025-05-25%20220530.png)
-
-![main menu](imgs/Screenshot%202025-05-25%20220542.png)
-
-![play with bot](imgs/Screenshot%202025-05-25%20220558.png)
-
-![Leaderboard](imgs/Screenshot%202025-05-25%20220617.png)
-
-
 **How to Play**
 - Single Player Mode:
   
@@ -153,6 +142,18 @@ RockPaperScissorsFX/
   Take turns making moves
 
   Results are saved to match history
+
+
+
+## Screenshots
+
+![username](imgs/Screenshot%202025-05-25%20220530.png)
+
+![main menu](imgs/Screenshot%202025-05-25%20220542.png)
+
+![play with bot](imgs/Screenshot%202025-05-25%20220558.png)
+
+![Leaderboard](imgs/Screenshot%202025-05-25%20220617.png)
 
 
 
