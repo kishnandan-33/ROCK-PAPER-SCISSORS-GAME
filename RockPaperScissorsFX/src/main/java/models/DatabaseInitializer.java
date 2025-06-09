@@ -5,18 +5,31 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javafx.application.Platform;
 
-
 public class DatabaseInitializer {
     public static void initializeDatabase() {
-        String createLeaderboardTable = """
-            CREATE TABLE IF NOT EXISTS leaderboard (
-                username VARCHAR(50) PRIMARY KEY,
-                total_games INT DEFAULT 0,
-                wins INT DEFAULT 0,
-                win_percentage FLOAT DEFAULT 0,
-                last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        String createUsersTable = """
+            CREATE TABLE IF NOT EXISTS users (
+                user_id INT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(50) UNIQUE NOT NULL,
+                password_hash VARCHAR(255) NOT NULL,
+                salt VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
             """;
+
+        String createLeaderboardTable = """
+    CREATE TABLE IF NOT EXISTS leaderboard (
+        user_id INT PRIMARY KEY,
+        username VARCHAR(50) NOT NULL UNIQUE,
+        total_games INT DEFAULT 0,
+        wins INT DEFAULT 0,
+        win_percentage FLOAT DEFAULT 0,
+        last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+    )
+    """;
+
+
 
         String createMatchHistoryTable = """
             CREATE TABLE IF NOT EXISTS match_history (
@@ -26,49 +39,48 @@ public class DatabaseInitializer {
                 player1_move VARCHAR(10) NOT NULL,
                 player2_move VARCHAR(10) NOT NULL,
                 winner VARCHAR(50),
-                match_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                INDEX idx_player1 (player1),
-                INDEX idx_player2 (player2),
-                INDEX idx_winner (winner)
+                match_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
             """;
+
         String createPlayerStatsView = """
             CREATE OR REPLACE VIEW player_stats AS
             SELECT 
                 username,
-                total_games,
+                wins + losses AS total_games,
                 wins,
-                win_percentage,
-                RANK() OVER (ORDER BY win_percentage DESC, wins DESC) AS rank
+                (wins * 100.0) / NULLIF((wins + losses), 0) AS win_percentage,
+                RANK() OVER (ORDER BY (wins * 100.0) / NULLIF((wins + losses), 0) DESC, wins DESC) AS rank
             FROM leaderboard
             """;
 
         try (Connection conn = DBUtil.getConnection();
              Statement stmt = conn.createStatement()) {
+
             if (conn == null) {
-                // Show error and exit app gracefully
                 Platform.runLater(() -> {
                     Utils.showError("Database Error", "Could not connect to the database. Please check your internet or configuration.");
                     System.exit(1);
                 });
             } else {
-                // Your existing DB initialization logic here
                 System.out.println("Database connected successfully.");
             }
 
-            // Create tables
+            // Execute schema setup
+            stmt.executeUpdate(createUsersTable);
             stmt.executeUpdate(createLeaderboardTable);
             stmt.executeUpdate(createMatchHistoryTable);
-            System.out.println("Database tables initialized successfully");
 
-            // Create view
+            System.out.println("Database tables initialized successfully.");
+
             try {
                 stmt.executeUpdate(createPlayerStatsView);
             } catch (SQLException e) {
-                System.out.println("View already exists or couldn't be created: " + e.getMessage());
+                System.out.println("View creation skipped: " + e.getMessage());
             }
+
         } catch (SQLException e) {
-            System.err.println("Error initializing database tables:");
+            System.err.println("Error initializing database:");
             e.printStackTrace();
         }
     }

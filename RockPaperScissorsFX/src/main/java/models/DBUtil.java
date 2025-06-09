@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtil {
-    private static final String DB_URL = "jdbc:mysql://avnadmin:AVNS_3kAGU-MvfBSQlb1LmjY@record-developapp007-06b2.j.aivencloud.com:23811/defaultdb?ssl-mode=REQUIRED";
+    private static final String DB_URL = "jdbc:mysql://avnadmin:AVNS_6d45KuX2N4Lu5Qnlolu@rps-developapp007-06b2.l.aivencloud.com:23811/defaultdb?ssl-mode=REQUIRED";
     private static final String DB_USER = "avnadmin";
-    private static final String DB_PASSWORD = "AVNS_3kAGU-MvfBSQlb1LmjY";
+    private static final String DB_PASSWORD = "AVNS_6d45KuX2N4Lu5Qnlolu";
 
     public static Connection getConnection() {
         try {

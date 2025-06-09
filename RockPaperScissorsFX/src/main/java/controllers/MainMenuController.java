@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 public class MainMenuController {
     private String username;
+    private int userId;
 
     private AudioClip clickSound;
 
@@ -19,6 +20,9 @@ public class MainMenuController {
         } else {
             this.username = username;
         }
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public MainMenuController() {
