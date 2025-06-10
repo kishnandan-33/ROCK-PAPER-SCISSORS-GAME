@@ -147,13 +147,23 @@ RockPaperScissorsFX/
 
 ## Screenshots
 
-![username](imgs/Screenshot%202025-05-25%20220530.png)
+![Register](imgs/Screenshot%202025-06-10%20103827.png)
 
-![main menu](imgs/Screenshot%202025-05-25%20220542.png)
+![registerd](imgs/Screenshot%202025-06-10%20103844.png)
 
-![play with bot](imgs/Screenshot%202025-05-25%20220558.png)
+![Login](imgs/Screenshot%202025-06-10%20103910.png)
 
-![Leaderboard](imgs/Screenshot%202025-05-25%20220617.png)
+![Main Menu](imgs/Screenshot%202025-06-10%20103932.png)
 
+![Play with Bot](imgs/Screenshot%202025-06-10%20104005.png)
 
+![Loss animation](imgs/Screenshot%202025-05-25%20220542.png)
+
+![win animation](imgs/Screenshot%202025-06-10%20104035.png)
+
+![host menu](imgs/Screenshot%202025-06-10%20104118.png)
+
+![host](imgs/Screenshot%202025-06-10%20104128.png)
+
+![Leaderboard](imgs/Screenshot%202025-06-10%20104158.png)
 
