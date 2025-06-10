@@ -11,25 +11,21 @@ public class DatabaseInitializer {
             CREATE TABLE IF NOT EXISTS users (
                 user_id INT AUTO_INCREMENT PRIMARY KEY,
                 username VARCHAR(50) UNIQUE NOT NULL,
-                password_hash VARCHAR(255) NOT NULL,
-                salt VARCHAR(255) NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                password VARCHAR(255) NOT NULL
             )
-            """;
+        """;
 
         String createLeaderboardTable = """
-    CREATE TABLE IF NOT EXISTS leaderboard (
-        user_id INT PRIMARY KEY,
-        username VARCHAR(50) NOT NULL UNIQUE,
-        total_games INT DEFAULT 0,
-        wins INT DEFAULT 0,
-        win_percentage FLOAT DEFAULT 0,
-        last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users(user_id)
-    )
-    """;
-
-
+            CREATE TABLE IF NOT EXISTS leaderboard (
+                user_id INT PRIMARY KEY,
+                username VARCHAR(50) NOT NULL UNIQUE,
+                total_games INT DEFAULT 0,
+                wins INT DEFAULT 0,
+                win_percentage FLOAT DEFAULT 0,
+                last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(user_id)
+            )
+        """;
 
         String createMatchHistoryTable = """
             CREATE TABLE IF NOT EXISTS match_history (
@@ -41,18 +37,18 @@ public class DatabaseInitializer {
                 winner VARCHAR(50),
                 match_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
-            """;
+        """;
 
         String createPlayerStatsView = """
             CREATE OR REPLACE VIEW player_stats AS
             SELECT 
                 username,
-                wins + losses AS total_games,
+                total_games,
                 wins,
-                (wins * 100.0) / NULLIF((wins + losses), 0) AS win_percentage,
-                RANK() OVER (ORDER BY (wins * 100.0) / NULLIF((wins + losses), 0) DESC, wins DESC) AS rank
+                win_percentage,
+                RANK() OVER (ORDER BY win_percentage DESC, wins DESC) AS rank
             FROM leaderboard
-            """;
+        """;
 
         try (Connection conn = DBUtil.getConnection();
              Statement stmt = conn.createStatement()) {
@@ -62,11 +58,11 @@ public class DatabaseInitializer {
                     Utils.showError("Database Error", "Could not connect to the database. Please check your internet or configuration.");
                     System.exit(1);
                 });
-            } else {
-                System.out.println("Database connected successfully.");
+                return;
             }
 
-            // Execute schema setup
+            System.out.println("Database connected successfully.");
+
             stmt.executeUpdate(createUsersTable);
             stmt.executeUpdate(createLeaderboardTable);
             stmt.executeUpdate(createMatchHistoryTable);
@@ -76,7 +72,7 @@ public class DatabaseInitializer {
             try {
                 stmt.executeUpdate(createPlayerStatsView);
             } catch (SQLException e) {
-                System.out.println("View creation skipped: " + e.getMessage());
+//                System.out.println("View creation skipped: " + e.getMessage());
             }
 
         } catch (SQLException e) {

@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 
 
-public class LoginDialog extends Dialog<Pair<String, Boolean>> {
+public class LoginDialog extends Dialog<LoginResult>  {
     private final ToggleGroup authGroup = new ToggleGroup();
     private final TextField usernameField = new TextField();
     private final PasswordField passwordField = new PasswordField();
@@ -100,13 +100,22 @@ public class LoginDialog extends Dialog<Pair<String, Boolean>> {
             if (dialogButton == loginButtonType) {
                 boolean isLogin = loginRadio.isSelected();
                 if (isLogin) {
-                    return new Pair<>(usernameField.getText().trim(), true);
+                    return new LoginResult(
+                            usernameField.getText().trim(),
+                            passwordField.getText().trim(),
+                            true
+                    );
                 } else {
-                    return new Pair<>(newUsernameField.getText().trim(), false);
+                    return new LoginResult(
+                            newUsernameField.getText().trim(),
+                            newPasswordField.getText().trim(),
+                            false
+                    );
                 }
             }
             return null;
         });
+
 
         // Validate input
         final Button loginButton = (Button) getDialogPane().lookupButton(loginButtonType);

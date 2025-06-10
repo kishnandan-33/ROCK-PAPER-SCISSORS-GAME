@@ -5,13 +5,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 import controllers.MainMenuController;
 import models.DatabaseInitializer;
 import models.LoginDialog;
 import models.AuthService;
-import java.util.Optional;
+import models.LoginResult;
 
+import java.util.Optional;
 
 public class RockPaperScissorsApp extends Application {
     private static String currentUsername;
@@ -20,7 +20,7 @@ public class RockPaperScissorsApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Initialize database (ensure tables exist, etc.)
+            // Initialize database
             DatabaseInitializer.initializeDatabase();
         } catch (Exception e) {
             System.err.println("Database init failed: " + e.getMessage());
@@ -28,23 +28,25 @@ public class RockPaperScissorsApp extends Application {
         }
 
         // Show login dialog
-        LoginDialog loginDialog = new LoginDialog();
         boolean authenticated = false;
 
         while (!authenticated) {
-            Optional<Pair<String, Boolean>> result = loginDialog.showAndWait();
+            LoginDialog dialog = new LoginDialog();
+            Optional<LoginResult> result = dialog.showAndWait();
+
             if (!result.isPresent()) {
                 Platform.exit();
                 return;
             }
 
-            Pair<String, Boolean> authData = result.get();
-            String username = authData.getKey();
-            boolean isLogin = authData.getValue();
+            LoginResult authData = result.get();
+            String username = authData.username;
+            String password = authData.password;
+            boolean isLogin = authData.isLogin;
 
             if (isLogin) {
                 // Login attempt
-                if (AuthService.authenticateUser(username, loginDialog.getPassword())) {
+                if (AuthService.authenticateUser(username, password)) {
                     currentUsername = username;
                     currentUserId = AuthService.getUserId(username);
                     authenticated = true;
@@ -53,7 +55,7 @@ public class RockPaperScissorsApp extends Application {
                 }
             } else {
                 // Registration attempt
-                if (AuthService.registerUser(username, loginDialog.getPassword())) {
+                if (AuthService.registerUser(username, password)) {
                     showAlert("Registration Successful", "Account created! Please login");
                 } else {
                     showAlert("Registration Failed", "Username already exists");

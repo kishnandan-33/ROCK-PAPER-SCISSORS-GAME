@@ -12,7 +12,7 @@ public class MainMenuController {
     private String username;
     private int userId;
 
-    private AudioClip clickSound;
+    private AudioClip clickSound = new AudioClip(getClass().getResource("/sounds/click.wav").toString());
 
     public void setUsername(String username) {
         if (username == null || username.trim().isEmpty()) {
@@ -25,23 +25,14 @@ public class MainMenuController {
         this.userId = userId;
     }
 
-    public MainMenuController() {
-        try {
-            clickSound = new AudioClip(getClass().getResource("/sounds/click.wav").toString());
-        } catch (Exception e) {
-            System.err.println("Error loading click sound: " + e.getMessage());
-        }
-    }
 
     @FXML
     private void handlePlayWithBot() {
-        playSound();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BotGame.fxml"));
             Parent root = loader.load();
             BotGameController controller = loader.getController();
-
-
+            clickSound.play();
             Stage stage = new Stage();
             stage.setTitle("Play with Bot - " + username);
             stage.setScene(new Scene(root, 600, 400));
@@ -54,11 +45,11 @@ public class MainMenuController {
 
     @FXML
     private void handlePlayWithFriend() {
-        playSound();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MultiplayerMenu.fxml"));
             Parent root = loader.load();
             MultiplayerMenuController controller = loader.getController();
+            clickSound.play();
 
             Stage stage = new Stage();
             stage.setTitle("Play with Friend - " + username);
@@ -72,12 +63,12 @@ public class MainMenuController {
 
     @FXML
     private void handleViewLeaderboard() {
-        playSound();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Leaderboard.fxml"));
             Parent root = loader.load();
             LeaderboardController controller = loader.getController();
             controller.loadLeaderboard();
+            clickSound.play();
 
             Stage stage = new Stage();
             stage.setTitle("Leaderboard");
@@ -90,11 +81,11 @@ public class MainMenuController {
 
     @FXML
     private void handleViewMatchHistory() {
-        playSound();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MatchHistory.fxml"));
             Parent root = loader.load();
             MatchHistoryController controller = loader.getController();
+            clickSound.play();
 
             Stage stage = new Stage();
             stage.setTitle("Match History - " + username);
@@ -115,10 +106,4 @@ public class MainMenuController {
         alert.showAndWait();
     }
 
-    // Helper: Play click sound safely
-    private void playSound() {
-        if (clickSound != null) {
-            clickSound.play();
-        }
-    }
 }
