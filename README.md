@@ -167,6 +167,6 @@ RockPaperScissorsFX/
 
 ![Leaderboard](imgs/Screenshot%202025-06-10%20104158.png)
 
-![video](imgs/2025-06-10%2012-00-02.mp4)
+![video](imgs/[2025-06-10%2012-00-02.mp4](https://github.com/kishnandan-33/ROCK-PAPER-SCISSORS-GAME/raw/refs/heads/main/imgs/2025-06-10%2012-00-02.mp4))
 
 
