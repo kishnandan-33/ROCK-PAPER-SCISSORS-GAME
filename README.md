@@ -146,7 +146,7 @@ RockPaperScissorsFX/
 
 ## Video
 
-Video Presentation of Game ![Click Here To Download](imgs/https://github.com/kishnandan-33/ROCK-PAPER-SCISSORS-GAME/raw/refs/heads/main/imgs/2025-06-10%2012-00-02.mp4)
+Video Presentation of Game ![Click Here To Download](imgs/2025-06-10%2012-00-02.mp4)
  
 ## Screenshots
 
